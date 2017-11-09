@@ -5,6 +5,7 @@ datalakeEndPoint=$3
 clientId=$4
 tenantId=$5
 clientSecret=$6
+subscriptionid=$7
 MangerIP="10.3.0.8"
 DirectorIP="10.3.0.4"
 curl -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/Director_Azure_Deployment/services' > /tmp/ClouderaServices
@@ -40,6 +41,10 @@ echo "Cloudera Hue Web UI Username/Password: admin/admin" >> /home/cloudera/Node
 echo "Your Datalake Directory for the testdrive: $datalakeDirName" >> /home/cloudera/NodeDetails
 echo "Your Datalake Endpoint for the testdrive: $datalakeEndPoint" >> /home/cloudera/NodeDetails
 echo "Your Output Data files on Datalake for the testdrive:  $datalakeEndPoint/$datalakeDirName/WordCount" >> /home/cloudera/NodeDetails
+echo "Your subscriptionID: $subscriptionid" >> /home/cloudera/NodeDetails
+echo "Your clientID: $clientid" >> /home/cloudera/NodeDetails
+echo "Your clientsecret: $clientsecret" >> /home/cloudera/NodeDetails
+echo "Your tenantID: $tenantid" >> /home/cloudera/NodeDetails
 #curl -X POST -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/'${ClusterName}'/services/'${HDFS}'/commands/restart'
 #sleep 60
 #curl -X POST -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/'${ClusterName}'/commands/restart'

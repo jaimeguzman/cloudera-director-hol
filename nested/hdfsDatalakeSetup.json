@@ -34,7 +34,8 @@
         }
     },
     "variables": {
-        "singleQuote": "'"
+        "singleQuote": "'",
+        "subscriptionId":"[subscription().subscriptionId]"
     },
     "resources": [
         {
@@ -51,7 +52,7 @@
                     "fileUris": [
                         "[concat(parameters('scriptsUri'),'scripts/hdfsdatalakesetup.sh')]"
                     ],
-                    "commandToExecute": "[concat('sh hdfsdatalakesetup.sh', ' ',variables('singleQuote'),parameters('vmSpec').adminPassword,variables('singleQuote'), ' ',variables('singleQuote'),parameters('datalakeDirName'),variables('singleQuote'), ' ',variables('singleQuote'),parameters('datalakeEndPoint'),variables('singleQuote'), ' ',variables('singleQuote'),parameters('AzureActiveDirectoryClientID'),variables('singleQuote'), ' ',variables('singleQuote'),parameters('AzuretenantID'),variables('singleQuote'), ' ',variables('singleQuote'),parameters('AzureActiveDirectoryClientSecret'),variables('singleQuote'))]"
+                    "commandToExecute": "[concat('sh hdfsdatalakesetup.sh', ' ',variables('singleQuote'),parameters('vmSpec').adminPassword,variables('singleQuote'), ' ',variables('singleQuote'),parameters('datalakeDirName'),variables('singleQuote'), ' ',variables('singleQuote'),parameters('datalakeEndPoint'),variables('singleQuote'), ' ',variables('singleQuote'),parameters('AzureActiveDirectoryClientID'),variables('singleQuote'), ' ',variables('singleQuote'),parameters('AzuretenantID'),variables('singleQuote'), ' ',variables('singleQuote'),parameters('AzureActiveDirectoryClientSecret'),variables('singleQuote'), ' ',variables('singleQuote'),variables('subscriptionId'),variables('singleQuote'))]"
                 }
             }
         }
