@@ -1,4 +1,4 @@
-#/bin/sh
+ 
 DataLakedir=$1
 MasterNode=$2
 InputFile=$3
@@ -26,14 +26,26 @@ hadoop fs -mkdir $EndPoint/roadshow/orders
 hadoop fs -mkdir $EndPoint/roadshow/original_access_logs
 hadoop fs -mkdir $EndPoint/roadshow/products
 # Downloading roadshow folder in cloudera user
-wget -O /home/cloudera/ https://aztdrepo.blob.core.windows.net/clouderadirector/roadshow.zip
+wget -O /home/cloudera/roadshow.zip https://aztdrepo.blob.core.windows.net/clouderadirector/roadshow.zip
 unzip /home/cloudera/roadshow.zip 
-# Installing Azure CLI 2.0
-echo "---Configure Repos for Azure Cli 2.0---"
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
-sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893
-sudo apt-get update
-sudo apt-get install apt-transport-https azure-cli openjdk-8-jdk -y
+# Start by making sure your system is up-to-date:
+sudo yum update
+# Compilers and related tools:
+sudo yum groupinstall -y "development tools"
+# Libraries needed during compilation to enable all features of Python:
+sudo yum install -y zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel expat-devel
+# If you are on a clean "minimal" install of CentOS you also need the wget tool:
+sudo yum install -y wget
+# Python 2.7.14:
+wget http://python.org/ftp/python/2.7.14/Python-2.7.14.tar.xz
+tar xf Python-2.7.14.tar.xz
+cd Python-2.7.14
+./configure --prefix=/usr/local --enable-unicode=ucs4 --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
+sudo make install
+yum check-update 
+yum install -y gcc libffi-devel python-devel openssl-devel
+# Downloding and installing Azure cli 2.0
+curl -L https://aka.ms/InstallAzureCli | bash
 az login --service-principal -u '$appID' --password '$password' --tenant '$tenantID'
 az account set --subscription '$subscriptionID'
 az dls fs upload --account $DataLakeName --source-path "/home/cloudera/roadshow/categories/634a056bc2b2f165-a00fa50900000000_2023495084_data.0.parq" --destination-path "/roadshow/categories/634a056bc2b2f165-a00fa50900000000_2023495084_data.0.parq"
