@@ -195,8 +195,8 @@
         "storageProfile": {
           "imageReference": {
             "publisher": "cloudera",
-            "offer": "cloudera-centos-6",
-            "sku": "CLOUDERA-CENTOS-6",
+            "offer": "cloudera-centos-os-7_2",
+            "sku": "7_2",
             "version": "latest"
           },
           "osDisk": {
