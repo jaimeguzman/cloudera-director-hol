@@ -24,7 +24,7 @@
     "variables": {
         "AzureSubscriptionID": "[subscription().subscriptionId]",
         "AzureActiveDirectoryTenantID": "[subscription().tenantId]",
-        "scriptsUri": "https://raw.githubusercontent.com/sysgain/cloudera-spectra-vip-new/master/",
+        "scriptsUri": "https://raw.githubusercontent.com/sysgain/cloudera-director-hol/master/",
         "share-resourcesUri": "[concat(variables('scriptsUri'), 'nested/shared-resources-new-vnet.json')]",
         "vnetUri": "[concat(variables('scriptsUri'), 'nested/update-new-vnet-dns.json')]",
         "networkRestartUri": "[concat(variables('scriptsUri'), 'nested/network-restart-new-vnet.json')]",
