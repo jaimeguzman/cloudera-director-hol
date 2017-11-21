@@ -16,20 +16,8 @@ sudo -u hdfs hdfs dfs -chown cloudera:cloudera /user/cloudera
 sudo -u hdfs hdfs dfs -chmod 777 /user/admin
 wget -O /home/cloudera/wordcount.jar https://aztdrepo.blob.core.windows.net/clouderadirector/wordcount.jar
 spark-submit --master yarn --deploy-mode client --executor-memory 1g --jars /home/cloudera/wordcount.jar --conf spark.driver.userClasspathFirst=true --conf spark.executor.extraClassPath=/home/cloudera/wordcount.jar --class com.SparkWordCount.SparkWordCount /home/cloudera/wordcount.jar hdfs://$MasterNode:8020/user/admin/$InputFile 0 $EndPoint/$DataLakedir/WordCount
-#creating directories in datalake
-hadoop fs -mkdir $EndPoint/roadshow
-hadoop fs -mkdir $EndPoint/roadshow/categories
-hadoop fs -mkdir $EndPoint/roadshow/customers
-hadoop fs -mkdir $EndPoint/roadshow/departments
-hadoop fs -mkdir $EndPoint/roadshow/order_items
-hadoop fs -mkdir $EndPoint/roadshow/orders
-hadoop fs -mkdir $EndPoint/roadshow/original_access_logs
-hadoop fs -mkdir $EndPoint/roadshow/products
-# Downloading roadshow folder in cloudera user
-wget -O /home/cloudera/roadshow.zip https://aztdrepo.blob.core.windows.net/clouderadirector/roadshow.zip
-unzip /home/cloudera/roadshow.zip 
 # Start by making sure your system is up-to-date:
-sudo yum update
+sudo yum update -y
 # Compilers and related tools:
 sudo yum groupinstall -y "development tools"
 # Libraries needed during compilation to enable all features of Python:
@@ -48,6 +36,17 @@ yum install -y gcc libffi-devel python-devel openssl-devel
 curl -L https://aka.ms/InstallAzureCli | bash
 az login --service-principal -u '$appID' --password '$password' --tenant '$tenantID'
 az account set --subscription '$subscriptionID'
+# Downloading roadshow folder in cloudera user
+wget -O /home/cloudera/roadshow.zip https://aztdrepo.blob.core.windows.net/clouderadirector/roadshow.zip
+unzip /home/cloudera/roadshow.zip
+#creating directories in datalake
+az dls fs create --account $DataLakeName --path /roadshow --folder
+az dls fs create --account $DataLakeName --path /roadshow/customers --folder
+az dls fs create --account $DataLakeName --path /roadshow/departments --folder
+az dls fs create --account $DataLakeName --path /roadshow/order_items --folder
+az dls fs create --account $DataLakeName --path /roadshow/orders --folder
+az dls fs create --account $DataLakeName --path /roadshow/original_access_logs --folder
+az dls fs create --account $DataLakeName --path /roadshow/products --folder
 az dls fs upload --account $DataLakeName --source-path "/home/cloudera/roadshow/categories/634a056bc2b2f165-a00fa50900000000_2023495084_data.0.parq" --destination-path "/roadshow/categories/634a056bc2b2f165-a00fa50900000000_2023495084_data.0.parq"
 az dls fs upload --account $DataLakeName --source-path "/home/cloudera/roadshow/customers/2c4aa43d35536dc4-3f190a8c00000000_1758161052_data.0.parq" --destination-path "/roadshow/customers/2c4aa43d35536dc4-3f190a8c00000000_1758161052_data.0.parq"
 az dls fs upload --account $DataLakeName --source-path "/home/cloudera/roadshow/departments/764c9dc54f37b5e4-c724b0fa00000000_981314998_data.0.parq" --destination-path "/roadshow/departments/764c9dc54f37b5e4-c724b0fa00000000_981314998_data.0.parq"

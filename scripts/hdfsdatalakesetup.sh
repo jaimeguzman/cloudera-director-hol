@@ -43,10 +43,10 @@ echo "Your Datalake Directory for the testdrive: $datalakeDirName" >> /home/clou
 echo "Your Datalake Endpoint for the testdrive: $datalakeEndPoint" >> /home/cloudera/NodeDetails
 echo "Your Output Data files on Datalake for the testdrive:  $datalakeEndPoint/$datalakeDirName/WordCount" >> /home/cloudera/NodeDetails
 echo "Your Datalakename: $datalakename" >> /home/cloudera/NodeDetails
-echo "Your SubscriptionID: $subscriptionid" >> /home/cloudera/NodeDetails
 echo "Your ClientID: $clientid" >> /home/cloudera/NodeDetails
 echo "Your Clientsecret: $clientsecret" >> /home/cloudera/NodeDetails
 echo "Your TenantID: $tenantid" >> /home/cloudera/NodeDetails
+echo "Your SubscriptionID: $subscriptionid" >> /home/cloudera/NodeDetails
 #curl -X POST -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/'${ClusterName}'/services/'${HDFS}'/commands/restart'
 #sleep 60
 #curl -X POST -u admin:admin 'http://'${MangerIP}':7180/api/v1/clusters/'${ClusterName}'/commands/restart'
