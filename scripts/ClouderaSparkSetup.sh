@@ -17,7 +17,7 @@ sudo -u hdfs hdfs dfs -chmod 777 /user/admin
 wget -O /home/cloudera/wordcount.jar https://aztdrepo.blob.core.windows.net/clouderadirector/wordcount.jar
 spark-submit --master yarn --deploy-mode client --executor-memory 1g --jars /home/cloudera/wordcount.jar --conf spark.driver.userClasspathFirst=true --conf spark.executor.extraClassPath=/home/cloudera/wordcount.jar --class com.SparkWordCount.SparkWordCount /home/cloudera/wordcount.jar hdfs://$MasterNode:8020/user/admin/$InputFile 0 $EndPoint/$DataLakedir/WordCount
 # Start by making sure your system is up-to-date:
-sudo yum update -y
+sudo yum -y update
 # Compilers and related tools:
 sudo yum groupinstall -y "development tools"
 # Libraries needed during compilation to enable all features of Python:
