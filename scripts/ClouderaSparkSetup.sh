@@ -6,8 +6,8 @@ EndPoint=$4
 DataLakeName=$5
 appID=$6
 password=$7
-tenantID=$8
-subscriptionID=$9
+tenID=$8
+subID=$9
 #Creating the Datalake Dirtectory
 hadoop fs -mkdir $EndPoint/$DataLakedir
 #Creating Cloudera user on hdfs cluster
@@ -34,8 +34,8 @@ sudo yum check-update
 sudo yum install -y gcc libffi-devel python-devel openssl-devel
 # Downloding and installing Azure cli 2.0
 curl -L https://aka.ms/InstallAzureCli | bash
-az login --service-principal -u '$appID' --password '$password' --tenant '$tenantID'
-az account set --subscription '$subscriptionID'
+az login --service-principal -u $appID --password $password --tenant $tenID
+az account set --subscription $subID
 # Downloading roadshow folder in cloudera user
 wget -O /home/cloudera/roadshow.zip https://aztdrepo.blob.core.windows.net/clouderadirector/roadshow.zip
 unzip /home/cloudera/roadshow.zip
