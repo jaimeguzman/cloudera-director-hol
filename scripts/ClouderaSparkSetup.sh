@@ -30,8 +30,8 @@ tar xf Python-2.7.14.tar.xz
 cd Python-2.7.14
 ./configure --prefix=/usr/local --enable-unicode=ucs4 --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
 sudo make install
-yum check-update 
-yum install -y gcc libffi-devel python-devel openssl-devel
+sudo yum check-update 
+sudo yum install -y gcc libffi-devel python-devel openssl-devel
 # Downloding and installing Azure cli 2.0
 curl -L https://aka.ms/InstallAzureCli | bash
 az login --service-principal -u '$appID' --password '$password' --tenant '$tenantID'
