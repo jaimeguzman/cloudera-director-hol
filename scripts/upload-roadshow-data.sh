@@ -25,7 +25,7 @@ az login --service-principal -u $appID --password $password --tenant $tenID
 az account set --subscription $subID
 # Downloading roadshow folder in cloudera user
 wget -O /home/cloudera/roadshow.zip https://aztdrepo.blob.core.windows.net/clouderadirector/roadshow.zip
-unzip /home/cloudera/roadshow.zip
+unzip -o -q /home/cloudera/roadshow.zip
 #creating directories in datalake
 az dls fs create --account $DataLakeName --path /roadshow --folder
 az dls fs create --account $DataLakeName --path /roadshow/customers --folder
