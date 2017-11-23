@@ -19,13 +19,13 @@ cd Python-2.7.14
 sudo make install
 sudo yum check-update 
 sudo yum install -y gcc libffi-devel python-devel openssl-devel
+# Downloading roadshow folder in cloudera user
+wget -O /home/cloudera/roadshow.zip https://aztdrepo.blob.core.windows.net/clouderadirector/roadshow.zip
+unzip -o -q -d /home/cloudera/ /home/cloudera/roadshow.zip
 # Downloding and installing Azure cli 2.0
 curl -L https://aka.ms/InstallAzureCli | bash
 az login --service-principal -u $appID --password $password --tenant $tenID
 az account set --subscription $subID
-# Downloading roadshow folder in cloudera user
-wget -O /home/cloudera/roadshow.zip https://aztdrepo.blob.core.windows.net/clouderadirector/roadshow.zip
-unzip -o -q /home/cloudera/roadshow.zip
 #creating directories in datalake
 az dls fs create --account $DataLakeName --path /roadshow --folder
 az dls fs create --account $DataLakeName --path /roadshow/customers --folder
